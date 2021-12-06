@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Day1 {
@@ -9,6 +11,7 @@ public class Day1 {
 		// TODO Auto-generated method stub
 		printDepthIncreases();
 		printSlidingWindowIncreases();
+		printSlidingWindowIncreases2();
 	}
 	
 	static void printDepthIncreases() {
@@ -48,6 +51,29 @@ public class Day1 {
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		System.out.println(count);
+	}
+
+	
+	static void printSlidingWindowIncreases2() {
+		File file = new File("input");
+		int count = 0;
+		List<Integer> list = new ArrayList<>();
+		try (Scanner scan = new Scanner(file);) {
+			while (scan.hasNext()) {
+				list.add(scan.nextInt());
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for (int i=1; i<list.size()-2; i++) {
+			int a = list.get(i-1) + list.get(i) + list.get(i+1);
+			int b = list.get(i) + list.get(i+1) + list.get(i+2);
+			if (a < b)
+				count++;
 		}
 		System.out.println(count);
 	}
